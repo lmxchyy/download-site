@@ -973,6 +973,10 @@ textarea {
     padding: 24px;
 }
 
+.profile-form-grid {
+    margin-top: 18px;
+}
+
 .data-table,
 .admin-table,
 table {

@@ -50,7 +50,7 @@ $page_title = '我的收藏';
                     <a href="dashboard.php"><i class="fas fa-chart-pie"></i> 仪表盘</a>
                     <a href="favorites.php" class="active"><i class="fas fa-heart"></i> 我的收藏</a>
                     <a href="downloads.php"><i class="fas fa-download"></i> 下载记录</a>
-                    <a href="profile.php" class="is-disabled"><i class="fas fa-user-pen"></i> 个人资料</a>
+                    <a href="profile.php"><i class="fas fa-user-pen"></i> 个人资料</a>
                 </nav>
             </aside>
 

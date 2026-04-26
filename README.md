@@ -11,6 +11,8 @@
 - 资源详情页
 - 直接下载与详情页下载入口
 - 用户登录、注册
+- 用户个人中心、我的收藏、下载记录
+- 常见误访问用户路径自动跳转兼容
 
 ### 后台
 - 管理员登录后进入仪表盘
@@ -45,7 +47,8 @@
 │  ├─ login.php             # 登录页
 │  ├─ register.php          # 注册页
 │  ├─ resource.php          # 资源详情页
-│  └─ search.php            # 全部资源 / 搜索页
+│  ├─ search.php            # 全部资源 / 搜索页
+│  └─ user/                 # 用户中心、收藏、下载记录与兼容跳转
 ├─ docker-compose.yml       # Docker 编排
 ├─ Dockerfile               # PHP/Apache 镜像构建
 ├─ install.sql              # 数据库初始化脚本
@@ -122,6 +125,11 @@ SOURCE install.sql;
 - `/resource.php?id=1` 资源详情页
 - `/login.php` 登录
 - `/register.php` 注册
+- `/user/` 用户中心入口
+- `/user/dashboard.php` 个人中心
+- `/user/favorites.php` 我的收藏
+- `/user/downloads.php` 下载记录
+- `/user/profile.php` 个人资料
 
 ### 后台页面
 - `/admin/` 仪表盘
@@ -138,8 +146,6 @@ SOURCE install.sql;
 - 生产环境请关闭调试输出并修改默认管理员密码
 
 ## 后续可扩展方向
-- 收藏功能完善
-- 下载记录页
 - 资源封面管理
 - 操作日志
 - 权限粒度细分
