@@ -35,15 +35,15 @@ $categories = $pdo->query("SELECT * FROM categories WHERE status = 1 ORDER BY so
         <div class="header-actions">
             <?php if (isLoggedIn()): ?>
             <div class="user-menu">
-                <span><i class="fas fa-circle-user"></i> <?= htmlspecialchars($_SESSION['username']) ?> <i class="fas fa-chevron-down"></i></span>
+                <button type="button" class="user-menu-toggle" aria-expanded="false"><i class="fas fa-circle-user"></i> <?= htmlspecialchars($_SESSION['username']) ?> <i class="fas fa-chevron-down"></i></button>
                 <div class="user-dropdown">
                     <a href="<?= $basePrefix ?>user/dashboard.php"><i class="fas fa-chart-line"></i> 个人中心</a>
-                    <a href="<?= $basePrefix ?>user/favorites.php" class="is-disabled"><i class="fas fa-heart"></i> 我的收藏</a>
-                    <a href="<?= $basePrefix ?>user/downloads.php" class="is-disabled"><i class="fas fa-download"></i> 下载记录</a>
+                    <a href="<?= $basePrefix ?>user/favorites.php"><i class="fas fa-heart"></i> 我的收藏</a>
+                    <a href="<?= $basePrefix ?>user/downloads.php"><i class="fas fa-download"></i> 下载记录</a>
                     <?php if (isAdmin()): ?>
                     <a href="<?= $basePrefix ?>admin/"><i class="fas fa-shield-halved"></i> 管理后台</a>
                     <?php endif; ?>
-                    <a href="<?= $basePrefix ?>logout.php" class="is-disabled"><i class="fas fa-right-from-bracket"></i> 退出登录</a>
+                    <a href="<?= $basePrefix ?>logout.php"><i class="fas fa-right-from-bracket"></i> 退出登录</a>
                 </div>
             </div>
             <?php else: ?>
@@ -59,23 +59,31 @@ $categories = $pdo->query("SELECT * FROM categories WHERE status = 1 ORDER BY so
 (() => {
     const dropdown = document.querySelector('.category-dropdown');
     const toggle = dropdown?.querySelector('.dropdown-toggle');
+    const userMenu = document.querySelector('.user-menu');
+    const userToggle = userMenu?.querySelector('.user-menu-toggle');
 
-    if (!dropdown || !toggle) {
-        return;
-    }
-
-    toggle.addEventListener('click', () => {
+    toggle?.addEventListener('click', (event) => {
+        event.stopPropagation();
         const isOpen = dropdown.classList.toggle('open');
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    userToggle?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = userMenu.classList.toggle('open');
+        userToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
     document.addEventListener('click', (event) => {
-        if (dropdown.contains(event.target)) {
-            return;
+        if (dropdown && toggle && !dropdown.contains(event.target)) {
+            dropdown.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
         }
 
-        dropdown.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+        if (userMenu && userToggle && !userMenu.contains(event.target)) {
+            userMenu.classList.remove('open');
+            userToggle.setAttribute('aria-expanded', 'false');
+        }
     });
 })();
 </script>

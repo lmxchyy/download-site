@@ -212,7 +212,8 @@ button[type="submit"]:hover,
 .pagination a,
 .dashboard-nav a,
 .admin-sidebar a,
-.user-menu > span {
+.user-menu > span,
+.user-menu-toggle {
     background: rgba(10, 20, 38, 0.7);
     color: var(--text);
     border: 1px solid var(--line);
@@ -477,21 +478,37 @@ textarea {
     z-index: 30;
 }
 
+.user-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
 .user-menu {
     position: relative;
 }
 
-.user-menu > span {
+.user-menu-toggle {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     min-height: 46px;
     padding: 0 18px;
     border-radius: 999px;
+    cursor: pointer;
+}
+
+.user-menu-toggle:hover,
+.user-menu.open > .user-menu-toggle {
+    color: #fff;
+    background: rgba(120, 170, 255, 0.12);
 }
 
 .dropdown.open .dropdown-menu,
-.user-menu:hover .user-dropdown {
+.user-menu.open .user-dropdown {
     display: flex !important;
 }
 
